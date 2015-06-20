@@ -156,6 +156,19 @@ abstract class AbstractCurl extends AbstractClient
                 }
             }
         }
+        
+        $num = 0;
+		foreach ($fields as $field => $value) {
+			if ($num == 0) {
+				$result = $field . '=' . $value;
+			} else {
+				$result .= '&' . $field . '=' . $value;
+			}
+			
+			$num++;
+		}
+		
+		return $result;
 
         return $multipart ? $fields : http_build_query($fields, '', '&');
     }
